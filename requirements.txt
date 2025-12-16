@@ -1,0 +1,15 @@
+pandas
+numpy
+matplotlib
+scikit-learn
+statsmodels
+jupyter
+
+fastapi
+uvicorn
+pandas
+statsmodels
+numpy
+pymysql
+cryptography
+prometheus-fastapi-instrumentator

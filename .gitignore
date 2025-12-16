@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node
+node_modules/
+dist/
+
+# Env
+.env
+
+# Data (如果数据很大可忽略)
+mysql_data/
+db_data/
+
+# OS
+.DS_Store
+Thumbs.db
