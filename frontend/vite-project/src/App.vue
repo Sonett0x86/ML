@@ -66,7 +66,7 @@ export default {
     // 初次加载：只显示历史数据
     async loadInitialHistory() {
       try {
-        const url = `http://127.0.0.1:8000/forecast?months=${this.months}`;
+        const url = `http://39.105.136.49:8000/forecast?months=${this.months}`;
         const resp = await fetch(url);
         const data = await resp.json();
 
