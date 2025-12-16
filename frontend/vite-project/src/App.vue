@@ -66,7 +66,9 @@ export default {
     // 初次加载：只显示历史数据
     async loadInitialHistory() {
       try {
-        const url = `http://39.105.136.49:8000/forecast?months=${this.months}`;
+        const apiHost = window.location.hostname;           // 访问服务器页面时就是 39.105.136.49
+        const url = `http://${apiHost}:8000/forecast?months=${this.months}`;
+
         const resp = await fetch(url);
         const data = await resp.json();
 
@@ -81,7 +83,9 @@ export default {
     async loadForecast() {
       this.loading = true;
       try {
-        const url = `http://127.0.0.1:8000/forecast?months=${this.months}`;
+        const apiHost = window.location.hostname;           // 访问服务器页面时就是 39.105.136.49
+        const url = `http://${apiHost}:8000/forecast?months=${this.months}`;
+
         const resp = await fetch(url);
         const data = await resp.json();
 

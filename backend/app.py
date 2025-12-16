@@ -15,11 +15,17 @@ app = FastAPI(
 )
 
 # 允许前端跨域访问
-# 你现在是 allow_origins=["*"] :contentReference[oaicite:3]{index=3}, 开发阶段没问题.
-# 上云后建议改成你的前端域名或反代域名.
+# 本地开发: http://127.0.0.1:5173 / http://localhost:5173
+# 服务器部署: http://39.105.136.49:8080
+origins = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "http://39.105.136.49:8080",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -33,7 +39,7 @@ Instrumentator().instrument(app).expose(app, endpoint="/metrics")
 def warmup_on_startup():
     """
     预热: 容器启动时就训练并缓存模型, 避免第一次调用 /forecast 时卡住.
-    你的模型训练是第一次请求才训练并缓存 :contentReference[oaicite:4]{index=4},
+    你的模型训练是第一次请求才训练并缓存,
     上云时更容易因首次请求超时导致体验差, 这里直接预热.
     """
     try:
