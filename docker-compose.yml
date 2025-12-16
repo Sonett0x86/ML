@@ -9,8 +9,10 @@ services:
       MYSQL_DATABASE: house_prices
     volumes:
       - db_data:/var/lib/mysql
+      # 1) 初始化 SQL: 必须挂到这个目录的“根”
       - ./mysql-init:/docker-entrypoint-initdb.d:ro
-      - ./data/raw_sales.csv:/var/lib/mysql-files/raw_sales.csv:ro
+      # 2) CSV 文件: MySQL 8 默认允许从 /var/lib/mysql-files 读(secure-file-priv)
+      - ./data:/var/lib/mysql-files
     healthcheck:
       test: ["CMD-SHELL", "mysqladmin ping -h localhost -p123456 || exit 1"]
       interval: 10s
@@ -52,7 +54,7 @@ services:
       backend:
         condition: service_healthy
     ports:
-      - "5173:5173"
+      - "8080:5173"
 
   # 4) Monitoring - Prometheus
   prometheus:
