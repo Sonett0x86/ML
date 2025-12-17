@@ -12,7 +12,7 @@ $NotebookPath = "ml\notebooks\01_data_loading_and_cleaning.ipynb"
 $OutDir = "ml\outputs"
 $ExecIpynb = Join-Path $OutDir "01_executed.ipynb"
 $OutHtml = Join-Path $OutDir "01_report.html"
-$ReqFile = "requirements-ml.txt"
+$ReqFile = "requirements.txt"
 $VenvDir = ".venv-ml"
 
 Write-Host "[0/6] Checking files..."
