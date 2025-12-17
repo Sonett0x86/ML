@@ -11,7 +11,7 @@ The interface allows:
 
 ### Option 2: Run locally (Windows PowerShell)
 
-This option allows the instructor to run the machine learning part locally without using Docker or the cloud deployment.
+This option allows the machine learning part of the project to be run locally without using Docker or the cloud deployment.
 
 **Steps:**
 1. Clone the project repository to a local machine.
