@@ -43,15 +43,31 @@ Write-Host "[3/6] Installing ML dependencies"
 & $Pip install -r $ReqFile
 
 Write-Host "[4/6] Executing notebook (this may take a few minutes)"
+
+$NotebookDir = Split-Path -Parent $NotebookPath
+$NotebookFile = Split-Path -Leaf $NotebookPath
+
+Push-Location $NotebookDir
+
 & $Python -m jupyter nbconvert --to notebook --execute `
     --ExecutePreprocessor.timeout=600 `
-    --output $ExecIpynb `
-    $NotebookPath
+    --output (Join-Path $Root $ExecIpynb) `
+    $NotebookFile
+
+$code = $LASTEXITCODE
+Pop-Location
+
+if ($code -ne 0) { throw "Notebook execution failed (exit code: $code)" }
+
+if (!(Test-Path $ExecIpynb)) { throw "Executed notebook was not created: $ExecIpynb" }
 
 Write-Host "[5/6] Exporting HTML report"
 & $Python -m jupyter nbconvert --to html `
     --output $OutHtml `
     $ExecIpynb
+
+if ($LASTEXITCODE -ne 0) { throw "HTML export failed (exit code: $LASTEXITCODE)" }
+
 
 Write-Host "[6/6] Finished successfully"
 Write-Host "--------------------------------------------"
