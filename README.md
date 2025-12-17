@@ -19,7 +19,6 @@ This option allows the instructor to run the machine learning part locally witho
 3. Run the following command:
 
 ```powershell
-.\run_notebook.ps1
 powershell -ExecutionPolicy Bypass -File .\run_notebook.ps1
 
 
